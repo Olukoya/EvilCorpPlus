@@ -1,8 +1,9 @@
 import java.util.*;
+import java.util.Random;
 public class Bank {
 
 	private HashMap<Integer,Account> members= new HashMap<Integer,Account>();
-	
+
 	public Account createMemberAccount(String name){
 		Random r = new Random();
 		int acct = 100000+r.nextInt(899999);
@@ -10,14 +11,27 @@ public class Bank {
 		addMember(a);
 		return a;
 	}
-	
+	public void closeAccount(int acctnum){
+
+		if(members.containsKey(acctnum)){
+			Account a = members.get(acctnum);
+			if(a.getBalance()==0){
+				members.remove(acctnum);
+			}
+		}
+	}
+
+	public HashMap<Integer, Account> getMembers() {
+		return members;
+	}
+
 	public void addMember(Account a){
 		members.put(a.getNumber(), a);
 	}
-	
+
 	public boolean findMember(int key){
 		if(members.containsKey(key)){
-		return true;
+			return true;
 		}
 		else return false;
 	}
@@ -25,7 +39,7 @@ public class Bank {
 	public Account getMemberAccount(int num){
 		return members.get(num);
 	}
-	
+
 	public void processAllTransactions(Account a){
 		Iterator<Transaction> i = a.getDatedTransactions().values().iterator();
 		while(i.hasNext()){
@@ -35,7 +49,7 @@ public class Bank {
 		}
 		a.removeTransactions();
 	}
-	
+
 	public void processTransaction(Transaction t, Account a){
 		double amount = t.getAmount();
 		switch(t.getType()){
@@ -49,5 +63,5 @@ public class Bank {
 		break;
 		}
 	}
-	
-}	
+
+}
