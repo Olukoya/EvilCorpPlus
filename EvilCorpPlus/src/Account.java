@@ -1,12 +1,17 @@
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 public class Account {
 	private int number;
 	private String name;
 	private double balance=0;
 	private SortedMap<Date,Transaction> datedTransactions= new TreeMap<Date, Transaction>(new DateComp());
 	private ArrayList<Transaction> transactionHistory = new ArrayList<Transaction>();
+	
+	private HashMap <Integer,String> accountMap = new HashMap <Integer,String>();
+	
 	
 	public Account(int number, String name){
 		this.number=number;
@@ -54,6 +59,9 @@ public class Account {
 	
 	public String getFormattedBalance(){
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
+		if (balance == 0)
+			return "Do you want to close your account? ";
+		else
 		return nf.format(balance);
 	}
 
