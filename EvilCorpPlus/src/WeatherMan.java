@@ -1,6 +1,9 @@
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Random;
 public class WeatherMan {
 
 	final int MILLS_IN_DAY = 24*60*60*1000;
